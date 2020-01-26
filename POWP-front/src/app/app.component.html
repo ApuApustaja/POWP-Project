@@ -2,7 +2,7 @@
 <div class="container">
   <div class="columns">
     <div class="column">
-    <button class="button is-light is-fullwidth">POWP projekt zaliczeniowy (CQRs, Strategy, Singleton, Abstract Factory, Command)</button>
+    <button class="button is-light is-fullwidth">POWP projekt zaliczeniowy (CQRS, Strategy, Singleton, Abstract Factory, Command)</button>
   </div>
   </div>
   <div class="columns">
@@ -21,40 +21,59 @@
       <div class="field ">
         <div class="control ">
           <div class="select is-fullwidth is-primary">
-            <select>
-              <option>Fabryka 1</option>
-              <option>Fabryka 2</option>
+            <select [(ngModel)]="selectedFab">
+              <option *ngFor="let fab of fabryki$  | async " [valueFab]="fab.id">{{fab.name}}</option>
             </select>
           </div>
         </div>
       </div>
-      <button class="button is-fullwidth is-primary">Potwierdź</button>
+      <button class="button is-fullwidth is-primary" (click)="getLinia()">Potwierdź</button>
+
     </div>
     <div class="column">
       <div class="field">
         <div class="control">
           <div class="select is-fullwidth is-warning">
-            <select>
-              <option>Linia 1</option>
-              <option>Linia 2</option>
+            <select [(ngModel)]="selectedLin">
+              <option *ngFor="let lin of linie$ | async " [valueLin]="lin.id">{{lin.name}}</option>
             </select>
           </div>
         </div>
       </div>
-      <button class="button is-fullwidth is-warning">Potwierdź</button>
+      <button class="button is-fullwidth is-warning " (click)="getMaszyny()">Potwierdź</button>
     </div>
     <div class="column">
       <div class="field">
         <div class="control">
           <div class="select is-fullwidth is-danger">
-            <select>
-              <option>Maszyna 1</option>
-              <option>Maszyna 2</option>
-            </select>
+            <select [(ngModel)]="selectedMan">
+              <option *ngFor="let man of maszyny$ | async " [valueMan]="man.id">{{man.name}}</option>
+            </select >
           </div>
         </div>
       </div>
-      <button class="button is-fullwidth is-danger">Potwierdź</button>
+      <button class="button is-fullwidth is-danger " (click)="getMaszynyInfo()">Potwierdź</button>
     </div>
   </div>
+  <div class="columns">
+    <div class="column">
+      <body>
+        <section class="section">
+          <div class="container">
+            <h1 class="title">Wyniki</h1>
+            <h2 class="subtitle" *ngFor="let man2 of maszynyInfo$ | async ">
+              <p>{{man2.name}} voltage: {{man2.voltage}} rotation: {{man2.rotationSpeed}} producent: {{man2.params}}</p>
+            </h2>
+          </div>
+        </section>
+      </body>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Wykonanie: </strong> Jakub Wiśniewski & Jakub Kryska
+      </p>
+    </div>
+  </footer>
 </div>
