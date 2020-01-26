@@ -1,8 +1,8 @@
-package entities.components;
+package factory.entities.components;
 
-import entities.Entity;
+import factory.entities.factories.Entity;
 
-public class EntityComponent {
+public abstract class EntityComponent {
   protected Entity entity;
 
   public void setEntity(Entity entity) {
